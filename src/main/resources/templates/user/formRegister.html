@@ -1,0 +1,158 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Đăng kí</title>
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" th:href="@{/Backend/plugins/fontawesome-free/css/all.min.css}">
+  
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  
+  <link rel="stylesheet" th:href="@{/Backend/plugins/icheck-bootstrap/icheck-bootstrap.min.css}">
+  
+  <link rel="stylesheet" th:href="@{/Backend/dist/css/adminlte.min.css}">
+  
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+</head>
+
+<body class="hold-transition register-page">
+	<div class="register-box">
+		<div class="register-logo">
+			<a href="../../index2.html"><b>Đăng kí</b></a>
+		</div>
+
+		<div class="card">
+			<div class="card-body register-card-body">
+			
+				<p class="login-box-msg" th:text="${status} ? ${status} : 'Vui lòng nhập đầy đủ thông tin' " style="color: red"  > </p>
+
+				<form th:action="@{/register}" th:object="${account}"  method="post" onsubmit="return validateForm()">
+					<div class="input-group mb-3">
+						<input type="text" th:field="*{fullname}" class="form-control" placeholder="Họ tên" required="required" >
+						<div class="input-group-append">
+							<div class="input-group-text">
+								<span class="fas fa-user"></span>
+							</div>
+						</div>
+					</div>
+
+					<div class="input-group mb-3">
+						<input type="text" th:field="*{username}" class="form-control"
+							placeholder="Tên tài khoản" required="required" >
+						<div class="input-group-append">
+							<div class="input-group-text">
+								<span class="fas fa-user"></span>
+							</div>
+						</div>
+						
+					</div>
+					<label th:text="${errusername}" style="color: red;"  ></label>
+
+					<div class="input-group mb-3">
+						<input id="password" type="password" th:field="*{password}" class="form-control" placeholder="Mật khẩu" required="required">
+						<div class="input-group-append">
+							<div class="input-group-text">
+								<span class="fas fa-lock"></span>
+							</div>
+						</div>
+					</div>
+					<div class="input-group mb-3">
+						<input id="retypepassword" type="password" class="form-control"
+							placeholder="Nhập lại mật khẩu" required="required" onkeyup="validatePassword()">
+						<div class="input-group-append">
+							<div class="input-group-text">
+								<span class="fas fa-lock"></span>
+							</div>
+						</div>
+					</div>
+					<label id="errretypepassword" style="color: red;"  ></label>
+
+
+					<div class="input-group mb-3">
+						<input type="email" th:field="*{email}" class="form-control" placeholder="Email" required="required">
+						<div class="input-group-append">
+							<div class="input-group-text">
+								<span class="fas fa-envelope"></span>
+							</div>
+						</div>
+					</div>
+					<label th:text="${erremail}" style="color:red;"></label>
+
+
+					<div class="row">
+						<div class="col-8">
+							<div class="icheck-primary">
+								<input type="checkbox" id="agreeTerms" name="terms"
+									value="agree"> <label for="agreeTerms"> Đồng ý
+									<a href="#">điều khoản</a>
+								</label>
+							</div>
+						</div>
+						<!-- /.col -->
+						<div class="col-4">
+							<button type="submit" class="btn btn-primary btn-block">Đăng
+								kí</button>
+						</div>
+						<!-- /.col -->
+					</div>
+				</form>
+
+				<div class="social-auth-links text-center">
+					<p>- Hoặc -</p>
+					<a href="#" class="btn btn-block btn-primary"> <i
+						class="fab fa-facebook mr-2"></i> Đăng kí bằng Facebook
+					</a> <a href="#" class="btn btn-block btn-danger"> <i
+						class="fab fa-google-plus mr-2"></i> Đăng kí bằng Google
+					</a>
+				</div>
+
+				<a href="login.html" class="text-center">Bạn đã có tài khoản</a>
+			</div>
+			<!-- /.form-box -->
+		</div>
+		<!-- /.card -->
+	</div>
+	<!-- /.register-box -->
+
+
+    <script th:src="@{/Backend/plugins/jquery/jquery.min.js}"></script>
+
+	<script th:src="@{/Backend/plugins/bootstrap/js/bootstrap.bundle.min.js}"></script>
+
+	<script th:src="@{/Backend/dist/js/adminlte.min.js}"></script>
+	
+	<script type="text/javascript">
+	 function validateForm(){
+	        
+         var password = document.getElementById('password').value;
+         var retyePassword = document.getElementById('retypepassword').value;
+          if(password != retyePassword){
+             var demo = document.getElementById('errretypepassword');
+             demo.innerHTML = "Không khớp mật khẩu";
+              return false;
+          }
+
+          
+       }
+
+      function validatePassword(){
+          var demo = document.getElementById('errretypepassword');
+          var password = document.getElementById('password').value;
+          var retyePassword = document.getElementById('retypepassword').value;
+          
+          if(password == retyePassword){
+             demo.innerHTML="";
+          }else{
+              demo.innerHTML = "Không khớp";
+          }
+
+
+
+      }
+	
+	
+	</script>
+</body>
+</html>
